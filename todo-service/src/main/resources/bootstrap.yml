@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: todo-service
+  cloud:
+    config:
+      # For an example of fetching the config retrieving the config-server-service from Eureka use:
+      discovery:
+        enabled: false # change that to true if you want to resolve the config server based on Eureka
+        # service-id: config-server-service # by default is set to configserver
+      uri: http://localhost:8888 # in this example I just use a hardcoded URL
+

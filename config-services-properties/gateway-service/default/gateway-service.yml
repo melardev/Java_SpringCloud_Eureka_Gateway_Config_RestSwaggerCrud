@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: todos
+          uri: lb://todo-service
+          predicates:
+          - Path=/api/todos/**
+          filters:
+          - StripPrefix=0
+          - name: Hystrix
+            args:
+              name: fallbackcmd
+              fallbackUri: forward:/fallback
+          - RewritePath=/api/todos/?(?<path>.*), /todos/$\{path}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    root: warn
+    com.melardev: trace
+    org.springframework.cloud.gateway: trace

@@ -1,0 +1,23 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server-service
+  cloud:
+    config:
+      server:
+        native:
+          # search-locations: "classpath:/config/{application}/{profile}" # if we had them properties in the resources/config folder
+          search-locations: "file:./config-services-properties/{application}/{profile}"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org.springframework.cloud.config.server: trace
+    com.melardev: debug

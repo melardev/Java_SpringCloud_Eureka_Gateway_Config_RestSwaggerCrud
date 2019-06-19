@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server-service
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          clone-on-start: false
+          uri: https://github.com/melardev/Java_SpringCloud_Eureka_Gateway_Config_RestSwaggerCrud
+          search-paths:
+            - "config-services-properties/{application}/{profile}"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+logging:
+  level:
+    org.springframework.cloud.config.server: trace
+    com.melardev: debug
